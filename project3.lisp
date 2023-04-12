@@ -1,9 +1,8 @@
 ;; set-member
+;; set-member
 (defun set-member (set item)
-  (cond ((null set) nil)
-        ((equal (car set) item) t)
+    (cond ((null set) (write nil))
+        ((equal (car set) item) t (write t))
         (t (set-member (cdr set) item)))
-    (pprint(find set item))
     )
-
-(set-member '(1 3 4 2) '(1 2 3 4 5))
+(set-member '(4  2 3 5 8 5 3 2) 8)
