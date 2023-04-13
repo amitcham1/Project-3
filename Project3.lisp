@@ -2,7 +2,7 @@
 
 (defun set-member (set item)
     (COND
-        ((EQ item (CAR set)) T)
+        ((EQUAL item (CAR set)) T)
         ((NULL (CAR set)) NIL)
         ((NOT(EQ item (CAR set))) 
             (set-member (CDR set) item)
@@ -20,18 +20,16 @@
 ; Problem 2 NOT WORKING YET
 
 (defun set-union (set-1 set-2)
-    (COND  
+    (COND 
         ((NULL set-1) set-2)
-        ((NULL set-2) set-1)
-        ((EQ (CAR set-1) (CAR set-2))
-            (set-union (CDR set-1) set-2)
+        ((EQUAL (set-member set-2 (CAR set-1)) T) 
+            (set-union(CDR set-1) set-2)
         )
-        ((NOT(EQ (CAR set-1) (CAR set-2))) 
-            (set-union set-1 (CDR set-2))
+        ((EQUAL (set-member set-2 (CAR set-1)) NIL) 
+            (set-union(CDR set-1) (CONS (CAR set-1) set-2))
         )
     )
 )
 
-(setq result (set-union '(1 2) '(2 4)))
-(WRITE result)
+(WRITE(list (set-union '(1 2) '(2 4))))
 (TERPRI)
